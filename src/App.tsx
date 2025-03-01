@@ -1,5 +1,11 @@
+import DynamicFormSystem from './components/dynamicFormSystem/dynamicFormSystem';
+
 const App = () => {
-  return <div>react לדוגמה</div>;
+  return (
+    <div>
+      <DynamicFormSystem />
+    </div>
+  );
 };
 
 export default App;
