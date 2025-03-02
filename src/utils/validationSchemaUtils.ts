@@ -1,3 +1,4 @@
+import { FormValues } from '../components/dynamicFormSystem/dynamicForm/dynamicForm';
 import {
   DEFAULT_NUMBER_MAX,
   DEFAULT_NUMBER_MIN,
@@ -118,4 +119,11 @@ export const generateValidationSchema = (schema: FormSchema) => {
     validationSchemaFields[field.name] = validator;
   });
   return validationSchemaFields;
+};
+
+export const initializeDefaultValues = (fields: any[]) => {
+  return fields.reduce((acc, field) => {
+    acc[field.name] = '';
+    return acc;
+  }, {} as FormValues);
 };

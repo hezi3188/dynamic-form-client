@@ -15,7 +15,10 @@ import {
 import { getFormById } from '../../../utils/schemaUtils';
 import { FormsList } from '../../../models/enums/formsList';
 import { useStyles } from './dynamicFormStyles';
-import { generateValidationSchema } from '../../../utils/validationSchemaUtils';
+import {
+  generateValidationSchema,
+  initializeDefaultValues,
+} from '../../../utils/validationSchemaUtils';
 import {
   BUTTON_RESET,
   BUTTON_SUBMIT,
@@ -39,13 +42,6 @@ const DynamicForm: React.FC<Props> = ({ formId }) => {
 
   const validationSchema = Yup.object().shape(generateValidationSchema(schema));
 
-  const initializeDefaultValues = (fields: any[]) => {
-    return fields.reduce((acc, field) => {
-      acc[field.name] = '';
-      return acc;
-    }, {} as FormValues);
-  };
-
   const {
     control,
     handleSubmit,
@@ -68,7 +64,10 @@ const DynamicForm: React.FC<Props> = ({ formId }) => {
         formId: formId.toString(),
         fields: data,
       };
-      const response = await axios.post(import.meta.env.VITE_API_URL, payload);
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/formSubmittion`,
+        payload
+      );
       if (response.status === 201) {
         toast.success(SUBMITTED_FORM_MESSAGE);
         reset();
