@@ -1,0 +1,6 @@
+export const DEFAULT_PASSWORD_MIN_LENGTH = 6;
+export const DEFAULT_PASSWORD_MAX_LENGTH = 128;
+export const DEFAULT_TEXT_MIN_LENGTH = 2;
+export const DEFAULT_TEXT_MAX_LENGTH = 255;
+export const DEFAULT_NUMBER_MIN = 0;
+export const DEFAULT_NUMBER_MAX = 100000;

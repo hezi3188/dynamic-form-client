@@ -5,23 +5,32 @@ import { useStyles } from './dynamicFormSystemStyle';
 import ListForms from './listForms/listForms';
 import DynamicForm from './dynamicForm/dynamicForm';
 import { SystemMode } from '../../models/enums/systemMode';
-import { DynamicSystemContext } from '../../context/dynamicSystemContext';
+import { FormsList } from '../../models/enums/formsList';
 
 const DynamicFormSystem = () => {
   const { classes } = useStyles();
 
-  const [systemMode, setSystemMode] = useState(SystemMode.LIST);
+  const [systemMode, setSystemMode] = useState(SystemMode.CREATE);
+  const [selectedFormId, setSelectedFormId] = useState(FormsList.REGISTRATION);
 
   return (
-    <DynamicSystemContext.Provider value={{ systemMode, setSystemMode }}>
-      <div className={classes.root}>
-        <CustomDrawer />
-        <div className={classes.content}>
-          <CustomNavigation />
-          {systemMode === SystemMode.LIST ? <ListForms /> : <DynamicForm />}
-        </div>
+    <div className={classes.root}>
+      <CustomDrawer
+        selectedFormId={selectedFormId}
+        setSelectedFormId={setSelectedFormId}
+      />
+      <div className={classes.content}>
+        <CustomNavigation
+          systemMode={systemMode}
+          setSystemMode={setSystemMode}
+        />
+        {systemMode === SystemMode.LIST ? (
+          <ListForms />
+        ) : (
+          <DynamicForm formId={selectedFormId} />
+        )}
       </div>
-    </DynamicSystemContext.Provider>
+    </div>
   );
 };
 

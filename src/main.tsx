@@ -6,8 +6,7 @@ import { createRoot } from 'react-dom/client';
 
 import { CacheProvider } from '@emotion/react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-
-import App from './App.tsx';
+import App from './app';
 
 const cacheRtl = createCache({
   key: 'muirtl',
