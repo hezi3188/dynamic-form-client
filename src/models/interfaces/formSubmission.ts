@@ -1,6 +1,5 @@
 export interface FormSubmission {
-  id: string;
-  formId: string;
+  _id: string;
   createdAt: string;
   fields: { [key: string]: string };
 }
