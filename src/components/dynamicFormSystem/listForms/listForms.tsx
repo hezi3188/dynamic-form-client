@@ -91,7 +91,7 @@ const ListForms: React.FC<Props> = ({ formId }) => {
         <List>
           {submissions.map((submission) => (
             <ListItem
-              key={submission.formId}
+              key={submission._id}
               onClick={() => handleListItemClick(submission)}
               className={classes.listItem}
             >
