@@ -18,3 +18,7 @@ export const DRAWER_TITLE = 'מערכת טפסים';
 
 export const SUBMITTED_FORM_MESSAGE = 'הטופס נשלח בהצלחה';
 export const SUBMIT_FORM_ERROR_MESSAGE = 'שגיאה בשליחת הטופס';
+
+export const FORM_DETAILS_TITLE = 'פרטי הטופס';
+export const LOAD_FAILED_LIST_MESSAGE = 'שגיאה בטעינת רשימת הטפסים';
+export const NO_DATA_MESSAGE = 'אין נתונים להצגה';

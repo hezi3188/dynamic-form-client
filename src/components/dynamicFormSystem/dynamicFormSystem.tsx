@@ -25,7 +25,7 @@ const DynamicFormSystem = () => {
           setSystemMode={setSystemMode}
         />
         {systemMode === SystemMode.LIST ? (
-          <ListForms />
+          <ListForms formId={selectedFormId} />
         ) : (
           <DynamicForm formId={selectedFormId} />
         )}
