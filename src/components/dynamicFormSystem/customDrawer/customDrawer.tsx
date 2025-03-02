@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   Divider,
   Drawer,
@@ -9,37 +10,74 @@ import {
   ListItemText,
   Toolbar,
   Typography,
+  Button,
 } from '@mui/material';
 import DynamicFormIcon from '@mui/icons-material/DynamicForm';
+import MenuIcon from '@mui/icons-material/Menu';
 import { useStyles } from './customDrawerStyles';
+import { getFormsNamesWithIds } from '../../../utils/schemaUtils';
+import { DRAWER_TITLE } from '../../../consts/strings';
+import { FormsList } from '../../../models/enums/formsList';
 
-const DRAWER_TITLE = 'מערכת טפסים';
+const formList = getFormsNamesWithIds();
 
-const CustomDrawer = () => {
+interface Props {
+  selectedFormId: FormsList;
+  setSelectedFormId: (id: FormsList) => void;
+}
+const CustomDrawer: React.FC<Props> = ({
+  selectedFormId,
+  setSelectedFormId,
+}) => {
   const { classes } = useStyles();
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const toggleDrawer = () => {
+    setDrawerOpen(!drawerOpen);
+  };
 
   return (
-    <Drawer className={classes.drawer} anchor="left" variant="permanent">
-      <Toolbar>
-        <IconButton edge="start"></IconButton>
-        <Typography variant="h6" noWrap component="div">
-          {DRAWER_TITLE}
-        </Typography>
-      </Toolbar>
-      <Divider />
-      <List>
-        {['טופס 1', 'טופס 2'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <DynamicFormIcon />
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Drawer>
+    <>
+      <div className={classes.root}>
+        <Button onClick={toggleDrawer}>
+          <MenuIcon className={classes.menuIcon} />
+        </Button>
+      </div>
+      <Drawer
+        className={classes.drawer}
+        anchor="left"
+        open={drawerOpen}
+        onClose={toggleDrawer}
+      >
+        <Toolbar>
+          <IconButton edge="start" onClick={toggleDrawer}>
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap component="div">
+            {DRAWER_TITLE}
+          </Typography>
+        </Toolbar>
+        <Divider />
+        <List>
+          {formList.map(({ id, title }) => (
+            <ListItem key={title} disablePadding>
+              <ListItemButton
+                onClick={() => {
+                  setSelectedFormId(id);
+                  toggleDrawer();
+                }}
+                selected={id === selectedFormId}
+              >
+                <ListItemIcon>
+                  <DynamicFormIcon />
+                </ListItemIcon>
+                <ListItemText primary={title} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+    </>
   );
 };
 

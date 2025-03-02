@@ -2,15 +2,16 @@ import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 import { useStyles } from './customNavigationStyles';
 import AddIcon from '@mui/icons-material/Add';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import { useContext } from 'react';
-import { DynamicSystemContext } from '../../../context/dynamicSystemContext';
+import { ADD_BUTTON_LABEL, LIST_BUTTON_LABEL } from '../../../consts/strings';
+import { SystemMode } from '../../../models/enums/systemMode';
 
-const ADD_BUTTON_LABEL = ' הוסף טופס';
-const LIST_BUTTON_LABEL = 'רשימת הטפסים';
-const CustomNavigation = () => {
+interface Props {
+  systemMode: SystemMode;
+  setSystemMode: (mode: SystemMode) => void;
+}
+const CustomNavigation: React.FC<Props> = ({ systemMode, setSystemMode }) => {
   const { classes } = useStyles();
 
-  const { systemMode, setSystemMode } = useContext(DynamicSystemContext);
   return (
     <div className={classes.root}>
       <BottomNavigation
